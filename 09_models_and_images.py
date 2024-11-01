@@ -11,6 +11,9 @@ from PIL import Image
 os.environ['SDL_WINDOWS_DPI_AWARENESS'] = 'permonitorv2'
 
 pygame.init()
+pygame.display.gl_set_attribute(pygame.GL_CONTEXT_MAJOR_VERSION, 3)
+pygame.display.gl_set_attribute(pygame.GL_CONTEXT_MINOR_VERSION, 3)
+pygame.display.gl_set_attribute(pygame.GL_CONTEXT_PROFILE_MASK, pygame.GL_CONTEXT_PROFILE_CORE)
 pygame.display.set_mode((800, 800), flags=pygame.OPENGL | pygame.DOUBLEBUF, vsync=True)
 
 
@@ -106,12 +109,12 @@ class Scene:
             ''',
         )
 
-        self.texture = ImageTexture('examples/data/textures/crate.png')
+        self.texture = ImageTexture('logo.png')
 
-        self.car_geometry = ModelGeometry('examples/data/models/lowpoly_toy_car.obj')
+        self.car_geometry = ModelGeometry('lowpoly_toy_car.obj')
         self.car = Mesh(self.program, self.car_geometry)
 
-        self.crate_geometry = ModelGeometry('examples/data/models/crate.obj')
+        self.crate_geometry = ModelGeometry('crate.obj')
         self.crate = Mesh(self.program, self.crate_geometry, self.texture)
 
     def camera_matrix(self):
@@ -129,9 +132,9 @@ class Scene:
 
         self.program['camera'].write(camera)
 
-        self.car.render((-0.4, 0.0, 0.0), (1.0, 0.0, 0.0), 0.2)
-        self.crate.render((0.0, 0.0, 0.0), (1.0, 1.0, 1.0), 0.2)
-        self.car.render((0.4, 0.0, 0.0), (0.0, 0.0, 1.0), 0.2)
+        self.car.render((-0.4, 0.0, 0.0), (1.0, 0.0, 0.0), 0.1)
+        self.crate.render((0.0, 0.0, 0.0), (1.0, 1.0, 1.0), 0.1)
+        self.car.render((0.4, 0.0, 0.0), (0.0, 0.0, 1.0), 0.1)
 
 
 scene = Scene()
